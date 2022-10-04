@@ -1,0 +1,9 @@
+{% extends 'enroll/base.html' %}
+{% block content %}
+
+<form action= "" method="POST">
+    {% csrf_token %}       
+    {{newtopic.as_p}} 
+    <center><input type="submit" class="btn btn-success" value="POST" margin-top="20px"></center>
+</form>
+{% endblock content %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% if request.user.is_superuser %}   
+
+    <h1> Wel-come {{request.user}}</h1>
+    
+    
+    <h1>Boards</h1>
+
+    <table border="1">
+    <thead> 
+        <tr>
+            <th>Board</th>
+            <th>Topics</th>
+            <th>Last Post</th>
+            <th>Created By</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for board in boards%}
+        <tr>
+            <td>
+                <a href="{% url 'board_topics' board.id %}">{{ board.name }}</a> <br>
+                <small style="color: gray">{{board.description}} </small>
+            </td>
+            <td><center>{{board.topics.count}}</center></td>
+            <td><center>{{board.board_date}}</center></td>
+            <td><center>{{board.board_starter.first_name}}</center></td>
+            <td>
+            <a href="{% url 'updateboard' board.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'deleteboard' board.id %}" class="btn btn-warning">Delete</a>
+        </td>
+        </tr>
+        {% endfor %}  
+        <a href="{% url 'users' %}">User Profile</a><br>
+
+    </tbody>
+    {% else %}
+
+    <h1>Wel come {{user.first_name}}</h1>
+
+    <h1>Boards</h1>
+
+
+    <table border="1">
+    <thead> 
+        <tr>
+            <th>Board</th>
+            <th>Topics</th>
+            <th>Last Post</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for board in boards%}
+        <tr>
+            <td>
+                <a href="{% url 'board_topics' board.id %}">{{ board.name }}</a> <br>
+                <small style="color: gray">{{board.description}} </small>
+            </td>
+            <td><center>{{board.topics.count}}</center></td>
+            <td><center>{{board.board_date}}</center></td>
+            <td>
+            <a href="{% url 'updateboard' board.id %}" class="btn btn-warning">Edit</a>
+        </td>
+        </tr>
+        {% endfor %}  
+        <a href="{% url 'update' user.id %}">User Profile</a><br>
+    </tbody>
+
+
+    {% endif %}
+    <a href="{% url 'password' %}">Change Password</a><br>
+    <a href="{% url 'logout' %}">Logout</a><br>
+ 
+
+
+</body>
+</html>

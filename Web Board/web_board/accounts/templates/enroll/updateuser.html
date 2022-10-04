@@ -1,0 +1,10 @@
+{% extends 'enroll/base.html' %}
+{% block content %}
+<h2>Update Student</h2>
+
+<form action= "" method="Post">
+    {% csrf_token %}
+    {{update.as_p}}
+    <center><input type="submit" class="btn btn-success" value="Update" margin-top="20px"></center>
+</form>
+{% endblock content %}  

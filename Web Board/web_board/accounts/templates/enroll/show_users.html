@@ -1,0 +1,54 @@
+{% extends 'enroll/base.html' %}
+{% block content %}
+<style>
+.abc{
+
+  color:green
+}
+</style>
+
+<center><h2>Uesrs Details</h2></center>
+{% if messages %}
+<div class="alert alert-success" role="alert">
+{% for msg in messages %}
+    <center><h3>{{msg}}</h3></center>
+{% endfor %}
+{% endif %}
+</div>
+
+
+
+
+{% if users %}      
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">User Name</th>            
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+        <th scope="row">{{user.id}}</th>
+        <th>{{user.first_name}}</th>
+        <th>{{user.last_name}}</th>
+        <th>{{user.email}}</th>
+        <th>{{user.username}}</th>
+        <th>
+        <a href="{% url 'update' user.id %}" class="btn btn-warning">Update</a>
+        <a href="{% url 'delete' user.id %}" class="btn btn-danger">Delete</a> 
+        </th>
+      </tr>    
+        {% endfor %}  
+      </tbody>
+</table>
+{% endif %}
+{% endblock content %} 
+
+
+

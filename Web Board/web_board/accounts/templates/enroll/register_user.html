@@ -1,0 +1,40 @@
+{% extends 'enroll/base.html' %}
+{% block content %}
+
+<style>
+.errorlist{
+color:red;
+}
+
+</style>
+
+<h2>
+    <center>Registration Page</center>
+</h2>
+
+<form action= "" method="POST">
+    {% csrf_token %}
+
+    {% if registration_form.errors %}
+
+    <div clas="alert alert-error">
+
+    <!-- {{registration_form.errors}} -->
+    {% for field,value in registration_form.errors.items %}
+
+        {{field}} {{value}}
+
+    {% endfor %}
+    
+    {%  endif %}
+    </div>
+
+    {{registration_form.as_p}}
+    
+    <label>Enter OTP:</label>
+    <input type="text" name="otp" maxlength="100">
+   
+    <center><input type="submit" class="btn btn-success" value="Register" margin-top="20px"></center>
+</form>
+
+{% endblock content %} 

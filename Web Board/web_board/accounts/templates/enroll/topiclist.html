@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% if request.user.is_superuser %}
+
+    <h1>Wel-come{{request.user}}</h1>
+
+    <h1>Topics</h1>
+    <a href="{% url 'newtopic' %}">New Topic</a>
+
+    <table border="1">
+    <thead> 
+        <tr>
+            <th>Topic Name</th>
+            <th>Latest Update</th>            
+            <th>Created By</th>
+            <th>Action</th>
+        </tr>
+    </thead>    
+    <tbody>
+        {% for topic in topics%}
+        <tr>
+            <td>{{topic.subject}}</td>
+            <td>{{topic.last_updated}}</td>
+            <td>{{topic.starter.first_name}}</td>
+            <td>
+            <a href="{% url 'updatetopic' topic.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'deletetopic' topic.id %}" class="btn btn-warning">Delete</a>
+        </td>
+        </tr>
+        {% endfor %}  
+    </tbody>
+
+    {% else %}
+    <h1>Wel come {{user.first_name}}</h1>
+
+    <h1>Topics</h1>
+    <a href="{% url 'newtopic' %}">New Topic</a>
+
+    <table border="1">
+    <thead> 
+        <tr>
+            <th>Topic Name</th>
+            <th>Latest Update</th>            
+            <th>Action</th>
+        </tr>
+    </thead>    
+    <tbody>
+        {% for topic in topics%}
+        <tr>
+            <td>{{topic.subject}}</td>
+            <td>{{topic.last_updated}}</td>
+            <td>
+            <a href="{% url 'updatetopic' topic.id %}" class="btn btn-warning">Edit</a>
+        </td>
+        </tr>
+        {% endfor %}  
+    </tbody>
+
+
+    {% endif %}
+</body>
+</html>
